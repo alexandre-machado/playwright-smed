@@ -18,10 +18,13 @@ test('has calendar', async ({ page }) => {
   await page.click('button:text("Agendar")');
   await page.waitForLoadState();
 
-  await expect(page.locator('ng-fullcalendar .fc-view-container')).not.toContainText('disponíveis');
+  for (let index = 0; index < 2; index++) {
 
-  await page.click('button.fc-next-button');
+    let calendarContainer = page.locator('ng-fullcalendar .fc-view-container');
+    await calendarContainer.screenshot({ path: `./screenshots/screenshot-${index}.png` });
+    await expect(calendarContainer).not.toContainText('disponíveis');
 
-  await expect(page.locator('ng-fullcalendar .fc-view-container')).not.toContainText('disponíveis');
+    await page.click('button.fc-next-button');
+  }
 
 });

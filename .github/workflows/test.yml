@@ -31,3 +31,11 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 10
+
+    - name: Send email with screenshots
+      run: node sendEmail.js
+      env:
+        NODE_ENV: production
+        EMAIL_USER: ${{ secrets.EMAIL_USER }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        EMAIL_TO: ${{ secrets.EMAIL_TO }}
