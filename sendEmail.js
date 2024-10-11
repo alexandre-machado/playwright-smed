@@ -1,6 +1,11 @@
 import { createTransport } from "nodemailer";
 import { readdirSync } from "fs";
 import { join } from "path";
+import { fileURLToPath } from 'url';
+
+// Definir __dirname para módulos ES
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = join(__filename, '..');
 
 async function sendEmail() {
     let transporter = createTransport({
