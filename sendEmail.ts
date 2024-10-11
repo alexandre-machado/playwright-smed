@@ -7,9 +7,12 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = join(__filename, '..');
 
-async function sendEmail() {
+export async function sendEmail() {
     let transporter = createTransport({
         service: "Gmail",
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASSWORD,
@@ -37,4 +40,4 @@ async function sendEmail() {
     console.log("Message sent: %s", info.messageId);
 }
 
-sendEmail().catch(console.error);
+// sendEmail().catch(console.error);
