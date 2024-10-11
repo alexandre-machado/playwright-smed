@@ -18,10 +18,10 @@ test('has calendar', async ({ page }) => {
   await page.click('button:text("Agendar")');
   await page.waitForLoadState();
 
-  await expect(page.locator('ng-fullcalendar .fc-view-container')).not.toHaveText('esgotado');
+  await expect(page.locator('ng-fullcalendar .fc-view-container')).not.toContainText('esgotado');
 
   await page.click('button.fc-next-button');
 
-  await expect(page.locator('ng-fullcalendar .fc-view-container')).not.toHaveText('horários disponíveis');
+  await expect(page.locator('ng-fullcalendar .fc-view-container')).not.toContainText('horários disponíveis');
 
 });
