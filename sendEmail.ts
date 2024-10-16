@@ -32,7 +32,7 @@ export async function sendEmail() {
     let info = await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: process.env.EMAIL_TO,
-        subject: "Agenda da SMED disponível",
+        subject: "Agenda da SMED",
         text: "Olhe os arquivos anexados",
         attachments: attachments
     });
@@ -40,4 +40,4 @@ export async function sendEmail() {
     console.log("Message sent: %s", info.messageId);
 }
 
-sendEmail().catch(console.error);
+// sendEmail().catch(console.error);

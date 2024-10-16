@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { sendEmail } from '../sendEmail'
 
 test('has calendar', async ({ page }) => {
   await page.goto('https://agendamento.procempa.com.br/?orgao=SMED');
@@ -27,4 +28,5 @@ test('has calendar', async ({ page }) => {
     await page.click('button.fc-next-button');
   }
 
+  sendEmail().catch(console.error);
 });
