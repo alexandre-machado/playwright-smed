@@ -28,5 +28,9 @@ test('has calendar', async ({ page }) => {
     await page.click('button.fc-next-button');
   }
 
-  sendEmail().catch(console.error);
+  try {
+    await sendEmail();
+  } catch (error) {
+    console.error(error)
+  }
 });
