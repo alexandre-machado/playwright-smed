@@ -7,6 +7,14 @@ on:
   schedule:
     - cron: '0 * * * *'  # Executa a cada hora
   workflow_dispatch:
+    
+env:
+  EMAIL_USER: ${{ secrets.EMAIL_USER }}
+  EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+  EMAIL_TO: ${{ secrets.EMAIL_TO }}
+  SMED_USERNAME: ${{ secrets.USERNAME }}
+  SMED_PASSWORD: ${{ secrets.PASSWORD }}
+
 jobs:
   test:
     timeout-minutes: 5
@@ -22,9 +30,6 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run Playwright tests
       run: npx playwright test
-      env:
-        SMED_USERNAME: ${{ secrets.USERNAME }}
-        SMED_PASSWORD: ${{ secrets.PASSWORD }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
@@ -32,11 +37,3 @@ jobs:
         path: playwright-report/
         retention-days: 10
 
-    - name: Send email with screenshots
-      if: failure()  # Condição para executar apenas em caso de falha
-      run: node sendEmail.ts
-      env:
-        NODE_ENV: production
-        EMAIL_USER: ${{ secrets.EMAIL_USER }}
-        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
-        EMAIL_TO: ${{ secrets.EMAIL_TO }}
